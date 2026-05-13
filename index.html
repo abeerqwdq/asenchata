@@ -3,20 +3,20 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1">
-<title>AscentChat</title>
+<title>AscentChat · ASCENTA 3</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Geist+Mono:wght@300;400;500;600&family=Lora:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
 *{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
 :root{
-  --bg:#f0ede8;--bg2:#e8e4de;--bg3:#faf8f5;--sf:#fff;
-  --ink:#1a1814;--ink2:#4a4540;--ink3:#8a8480;--ink4:#b0aca8;
-  --line:rgba(60,50,40,0.1);--line2:rgba(60,50,40,0.18);
-  --A:#c17a45;--A2:#d4894f;--As:rgba(193,122,69,0.12);--Ag:rgba(193,122,69,0.26);
-  --G:#5a9e6f;--R:#c45a5a;
-  --mono:'Geist Mono',ui-monospace,monospace;
-  --serif:'Lora',Georgia,serif;
+  --bg:#0a0a0f;--bg2:#12121a;--bg3:#0f0f16;--sf:#12121a;
+  --ink:#e4e4e7;--ink2:#a1a1aa;--ink3:#71717a;--ink4:#52525b;
+  --line:rgba(120,120,140,0.18);--line2:rgba(120,120,140,0.28);
+  --A:#60a5fa;--A2:#93c5fd;--As:rgba(96,165,250,0.13);--Ag:rgba(96,165,250,0.35);
+  --G:#34d399;--R:#f87171;
+  --mono:'IBM Plex Mono',ui-monospace,Menlo,monospace;
+  --serif:'Times New Roman',Times,serif;
   --ease:.2s cubic-bezier(.4,0,.2,1);
   --sw:272px;
   --tbh:52px;
@@ -25,7 +25,7 @@ html,body{height:100%;overflow:hidden;background:var(--bg);color:var(--ink);font
 
 /* ── TOASTS ── */
 #toasts{position:fixed;top:16px;right:16px;z-index:9000;display:flex;flex-direction:column;gap:8px;pointer-events:none;max-width:300px}
-.toast{background:var(--sf);border:1px solid var(--line2);border-radius:16px;padding:12px 14px;box-shadow:0 8px 32px rgba(60,40,20,0.18);display:flex;align-items:center;gap:10px;pointer-events:all;cursor:pointer;animation:tIN .3s cubic-bezier(.34,1.56,.64,1) forwards}
+.toast{background:var(--sf);border:1px solid var(--line2);border-radius:16px;padding:12px 14px;box-shadow:0 8px 32px rgba(0,0,0,0.5);display:flex;align-items:center;gap:10px;pointer-events:all;cursor:pointer;animation:tIN .3s cubic-bezier(.34,1.56,.64,1) forwards}
 .toast.bye{animation:tOUT .2s ease-in forwards}
 @keyframes tIN{from{opacity:0;transform:translateX(50px) scale(.9)}to{opacity:1;transform:none}}
 @keyframes tOUT{to{opacity:0;transform:translateX(50px) scale(.9)}}
@@ -39,32 +39,36 @@ html,body{height:100%;overflow:hidden;background:var(--bg);color:var(--ink);font
 .s-logo{font-family:var(--serif);font-size:48px;font-weight:600;color:var(--ink);letter-spacing:-2.5px;line-height:1;margin-bottom:4px}
 .s-logo em{color:var(--A);font-style:normal}
 .s-sub{font-size:10px;letter-spacing:2.5px;text-transform:uppercase;color:var(--ink3);margin-bottom:32px}
-.s-card{width:100%;background:var(--sf);border:1px solid var(--line2);border-radius:22px;padding:28px;box-shadow:0 8px 40px rgba(60,40,20,0.13)}
+.s-card{width:100%;background:var(--sf);border:1px solid var(--line2);border-radius:22px;padding:28px;box-shadow:0 8px 40px rgba(0,0,0,0.5)}
 .s-lbl{font-size:10px;letter-spacing:1.4px;text-transform:uppercase;color:var(--ink3);margin-bottom:8px}
 .s-in{width:100%;padding:13px 15px;background:var(--bg);border:1.5px solid var(--line2);border-radius:10px;color:var(--ink);font-family:var(--mono);font-size:15px;outline:none;transition:var(--ease);margin-bottom:14px;-webkit-appearance:none}
 .s-in:focus{border-color:var(--A);box-shadow:0 0 0 3px var(--As)}
 .s-in::placeholder{color:var(--ink4)}
 .s-rem{display:flex;align-items:center;gap:8px;font-size:12px;color:var(--ink3);margin-bottom:16px;cursor:pointer;user-select:none}
 .s-rem input{accent-color:var(--A);width:16px;height:16px;cursor:pointer}
-.s-btn{width:100%;padding:14px;background:var(--A);color:#fff;border:none;border-radius:10px;font-family:var(--mono);font-size:13px;letter-spacing:1px;font-weight:600;cursor:pointer;transition:var(--ease);touch-action:manipulation}
-.s-btn:hover{background:var(--A2);box-shadow:0 4px 18px var(--Ag)}
+.s-btn{width:100%;padding:14px;background:var(--As);color:var(--A);border:1.5px solid rgba(96,165,250,0.3);border-radius:10px;font-family:var(--mono);font-size:13px;letter-spacing:1px;font-weight:600;cursor:pointer;transition:var(--ease);touch-action:manipulation}
+.s-btn:hover{background:rgba(96,165,250,0.22);border-color:rgba(96,165,250,0.55);color:var(--A2);box-shadow:0 4px 18px var(--Ag)}
 .s-btn:active{transform:scale(.97)}
-.s-err{margin-top:12px;font-size:12px;min-height:18px}
+.s-back{display:block;margin-bottom:16px;font-size:11px;color:var(--ink3);text-decoration:none;letter-spacing:.5px;transition:var(--ease)}
+.s-back:hover{color:var(--A)}
+.s-err{margin-top:12px;font-size:12px;min-height:18px;color:var(--R)}
 
 /* ── APP ── */
 #app{display:none;height:100%;flex-direction:column}
 #app.live{display:flex}
 
 /* ── TOPBAR ── */
-.topbar{height:var(--tbh);flex:0 0 var(--tbh);display:flex;align-items:center;gap:10px;padding:0 14px;background:var(--sf);border-bottom:1px solid var(--line);z-index:100}
+.topbar{height:var(--tbh);flex:0 0 var(--tbh);display:flex;align-items:center;gap:10px;padding:0 14px;background:rgba(8,8,12,0.9);backdrop-filter:blur(16px);border-bottom:1px solid var(--line);z-index:100}
 .tb-hamburger{width:36px;height:36px;border-radius:9px;border:1.5px solid var(--line);background:transparent;color:var(--ink3);cursor:pointer;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;transition:var(--ease);flex:0 0 36px;touch-action:manipulation}
 .tb-hamburger:hover{background:var(--bg2);color:var(--ink)}
 .tb-hamburger span{display:block;width:14px;height:1.5px;background:currentColor;border-radius:2px;transition:var(--ease)}
 .tb-brand{font-family:var(--serif);font-size:20px;font-weight:600;color:var(--ink);letter-spacing:-1px}
 .tb-brand em{color:var(--A);font-style:normal}
+.tb-home{font-size:11px;color:var(--ink3);letter-spacing:.5px;text-decoration:none;padding:6px 10px;border:1px solid var(--line);border-radius:8px;transition:var(--ease)}
+.tb-home:hover{color:var(--A);border-color:rgba(96,165,250,0.3)}
 .tb-grow{flex:1}
 .tb-chip{display:flex;align-items:center;gap:7px;padding:6px 12px;border-radius:100px;background:var(--As);font-size:11px;color:var(--A);font-weight:600}
-.tb-av{width:22px;height:22px;border-radius:5px;background:var(--A);color:#fff;display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:800}
+.tb-av{width:22px;height:22px;border-radius:5px;background:var(--A);color:#000;display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:800}
 .tb-notify{position:relative}
 .tb-nbadge{position:absolute;top:-4px;right:-4px;width:14px;height:14px;border-radius:50%;background:var(--R);color:#fff;font-size:8px;font-weight:800;display:none;align-items:center;justify-content:center;border:2px solid var(--sf)}
 .tb-nbadge.show{display:flex}
@@ -82,24 +86,21 @@ html,body{height:100%;overflow:hidden;background:var(--bg);color:var(--ink);font
 }
 .sidebar.closed{width:0;flex-basis:0;overflow:hidden}
 
-/* Overlay mode: tablets + phones */
 @media(max-width:768px){
   .sidebar{
     position:absolute;top:0;left:0;bottom:0;
     width:var(--sw) !important;flex:none !important;
-    box-shadow:0 0 40px rgba(30,20,10,0.2);
+    box-shadow:0 0 40px rgba(0,0,0,0.6);
     transform:translateX(0);
     transition:transform var(--ease);
   }
   .sidebar.closed{transform:translateX(calc(-1 * var(--sw)));width:var(--sw) !important;flex:none !important}
+  .sb-veil{display:block !important}
 }
-/* Compact sidebar on tablets */
 @media(min-width:600px) and (max-width:768px){:root{--sw:240px}}
-/* Phone */
 @media(max-width:599px){:root{--sw:88vw}}
 
-/* Veil: hidden by default, shown via JS when sidebar opens on mobile */
-.sb-veil{display:none;position:absolute;inset:0;z-index:49;background:rgba(30,20,10,0.22);touch-action:none}
+.sb-veil{display:none;position:absolute;inset:0;z-index:49;background:rgba(0,0,0,0.5);backdrop-filter:blur(2px);touch-action:none}
 
 .sb-head{padding:12px 12px 10px;border-bottom:1px solid var(--line);display:flex;flex-direction:column;gap:8px;flex:0 0 auto}
 .sb-search{width:100%;padding:10px 12px;background:var(--bg);border:1.5px solid var(--line);border-radius:10px;color:var(--ink);font-family:var(--mono);font-size:13px;outline:none;transition:var(--ease);-webkit-appearance:none}
@@ -107,22 +108,21 @@ html,body{height:100%;overflow:hidden;background:var(--bg);color:var(--ink);font
 .sb-search::placeholder{color:var(--ink4)}
 .sb-tabs{display:flex;gap:3px;background:var(--bg2);border-radius:9px;padding:3px}
 .sb-tab{flex:1;padding:8px 4px;text-align:center;font-size:11px;letter-spacing:.5px;text-transform:uppercase;font-weight:500;color:var(--ink3);border-radius:7px;cursor:pointer;transition:var(--ease);touch-action:manipulation;user-select:none}
-.sb-tab.on{background:var(--sf);color:var(--A);box-shadow:0 1px 4px rgba(60,40,20,0.08)}
-.ng-btn{width:100%;padding:9px;background:var(--As);border:1.5px dashed rgba(193,122,69,0.35);border-radius:9px;color:var(--A);font-family:var(--mono);font-size:12px;font-weight:500;cursor:pointer;transition:var(--ease);touch-action:manipulation;display:none}
+.sb-tab.on{background:var(--sf);color:var(--A);box-shadow:0 1px 4px rgba(0,0,0,0.3)}
+.ng-btn{width:100%;padding:9px;background:var(--As);border:1.5px dashed rgba(96,165,250,0.3);border-radius:9px;color:var(--A);font-family:var(--mono);font-size:12px;font-weight:500;cursor:pointer;transition:var(--ease);touch-action:manipulation;display:none}
 .ng-btn.show{display:block}
-.ng-btn:hover{background:rgba(193,122,69,0.2)}
+.ng-btn:hover{background:rgba(96,165,250,0.22)}
 .ng-btn:active{transform:scale(.97)}
 
 .conv-list{flex:1;overflow-y:auto;overflow-x:hidden;padding:6px 8px;display:flex;flex-direction:column;gap:1px;-webkit-overflow-scrolling:touch}
 .conv-list::-webkit-scrollbar{width:3px}
 .conv-list::-webkit-scrollbar-thumb{background:var(--line2);border-radius:2px}
 
-/* Conversation item */
 .ci{display:flex;align-items:center;gap:9px;padding:11px 10px;border-radius:11px;cursor:pointer;transition:var(--ease);touch-action:manipulation;-webkit-user-select:none;user-select:none}
 .ci:hover,.ci:active{background:var(--bg2)}
 .ci.on{background:var(--As)}
 .ci-av{width:40px;height:40px;border-radius:11px;display:flex;align-items:center;justify-content:center;font-size:16px;font-weight:700;flex:0 0 40px;background:var(--bg2);color:var(--ink3);border:1.5px solid var(--line);transition:var(--ease);position:relative}
-.ci.on .ci-av{background:var(--A);color:#fff;border-color:transparent}
+.ci.on .ci-av{background:var(--A);color:#000;border-color:transparent}
 .ci-dot{position:absolute;bottom:-2px;right:-2px;width:11px;height:11px;border-radius:50%;background:var(--G);border:2.5px solid var(--bg3)}
 .ci.on .ci-dot{border-color:var(--As)}
 .ci-info{flex:1;min-width:0}
@@ -131,7 +131,7 @@ html,body{height:100%;overflow:hidden;background:var(--bg);color:var(--ink);font
 .ci-preview.unread{color:var(--ink2);font-weight:600}
 .ci-meta{display:flex;flex-direction:column;align-items:flex-end;gap:5px;flex:0 0 auto}
 .ci-time{font-size:10px;color:var(--ink4)}
-.ci-badge{min-width:18px;height:18px;border-radius:9px;background:var(--A);color:#fff;font-size:9px;font-weight:800;display:flex;align-items:center;justify-content:center;padding:0 5px}
+.ci-badge{min-width:18px;height:18px;border-radius:9px;background:var(--A);color:#000;font-size:9px;font-weight:800;display:flex;align-items:center;justify-content:center;padding:0 5px}
 .c-empty{padding:28px 12px;text-align:center;font-size:12px;color:var(--ink4);line-height:1.9}
 
 /* ── CHAT PANEL ── */
@@ -141,12 +141,11 @@ html,body{height:100%;overflow:hidden;background:var(--bg);color:var(--ink);font
 @keyframes bob{0%,100%{transform:translateY(0)}50%{transform:translateY(-8px)}}
 .chat-ph-txt{font-size:12px;color:var(--ink4);letter-spacing:.5px;text-align:center}
 
-.chat-hdr{height:54px;flex:0 0 54px;display:flex;align-items:center;gap:11px;padding:0 16px;background:var(--sf);border-bottom:1px solid var(--line)}
-.ch-av{width:34px;height:34px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:15px;font-weight:700;background:var(--As);color:var(--A);border:1.5px solid rgba(193,122,69,0.2);flex:0 0 34px}
+.chat-hdr{height:54px;flex:0 0 54px;display:flex;align-items:center;gap:11px;padding:0 16px;background:rgba(12,12,18,0.8);backdrop-filter:blur(12px);border-bottom:1px solid var(--line)}
+.ch-av{width:34px;height:34px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:15px;font-weight:700;background:var(--As);color:var(--A);border:1.5px solid rgba(96,165,250,0.2);flex:0 0 34px}
 .ch-info{flex:1;min-width:0}
 .ch-name{font-size:14px;font-weight:600;color:var(--ink);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .ch-sub{font-size:10px;color:var(--ink3);margin-top:1px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-/* Back button (mobile only) */
 .ch-back{display:none;width:36px;height:36px;border-radius:9px;border:1.5px solid var(--line);background:transparent;color:var(--ink3);cursor:pointer;align-items:center;justify-content:center;font-size:18px;flex:0 0 36px;touch-action:manipulation}
 @media(max-width:768px){.ch-back{display:flex}}
 
@@ -169,14 +168,13 @@ html,body{height:100%;overflow:hidden;background:var(--bg);color:var(--ink);font
 @media(max-width:500px){.m-body{max-width:85%}}
 .mrow.me .m-body{align-items:flex-end}
 .m-sender{font-size:10px;color:var(--ink3);margin-bottom:3px;padding-left:2px}
-/* hover = long-press on mobile */
 .bw{position:relative}
 .react-bar{
   display:none;position:absolute;z-index:60;
   bottom:calc(100% + 6px);
   background:var(--sf);border:1px solid var(--line2);
   border-radius:14px;padding:8px 10px;gap:4px;
-  box-shadow:0 8px 32px rgba(60,40,20,0.18);white-space:nowrap;
+  box-shadow:0 8px 32px rgba(0,0,0,0.5);white-space:nowrap;
 }
 .mrow:not(.me) .react-bar{left:0}
 .mrow.me .react-bar{right:0}
@@ -185,8 +183,8 @@ html,body{height:100%;overflow:hidden;background:var(--bg);color:var(--ink);font
 .rc{font-size:18px;cursor:pointer;padding:3px;border-radius:7px;transition:var(--ease);touch-action:manipulation}
 .rc:hover,.rc:active{background:var(--bg2);transform:scale(1.2)}
 .bubble{padding:10px 14px;border-radius:17px;font-size:14px;line-height:1.6;word-break:break-word;white-space:pre-wrap}
-.mrow:not(.me) .bubble{background:var(--sf);border:1px solid var(--line);color:var(--ink);border-bottom-left-radius:4px;box-shadow:0 1px 3px rgba(60,40,20,0.05)}
-.mrow.me .bubble{background:linear-gradient(135deg,#c17a45,#d4894f);color:#fff;border-bottom-right-radius:4px;box-shadow:0 2px 10px var(--Ag)}
+.mrow:not(.me) .bubble{background:rgba(25,25,35,0.9);border:1px solid var(--line);color:var(--ink);border-bottom-left-radius:4px}
+.mrow.me .bubble{background:rgba(96,165,250,0.18);border:1px solid rgba(96,165,250,0.3);color:#e0eeff;border-bottom-right-radius:4px;box-shadow:0 2px 10px var(--Ag)}
 .rxns{display:flex;gap:4px;margin-top:5px;flex-wrap:wrap}
 .rxn{font-size:13px;padding:3px 8px;background:var(--bg2);border:1px solid var(--line);border-radius:100px;cursor:pointer;transition:var(--ease);display:flex;align-items:center;gap:3px;touch-action:manipulation}
 .rxn:hover{background:var(--bg);border-color:var(--A)}
@@ -194,14 +192,13 @@ html,body{height:100%;overflow:hidden;background:var(--bg);color:var(--ink);font
 .m-time{font-size:10px;color:var(--ink4);margin-top:4px;padding:0 2px}
 
 /* Scroll FAB */
-.sfab{position:absolute;bottom:86px;right:14px;width:36px;height:36px;border-radius:50%;background:var(--A);color:#fff;border:none;box-shadow:0 4px 16px var(--Ag);display:none;align-items:center;justify-content:center;cursor:pointer;font-size:16px;z-index:10;transition:var(--ease);touch-action:manipulation}
+.sfab{position:absolute;bottom:86px;right:14px;width:36px;height:36px;border-radius:50%;background:var(--A);color:#000;border:none;box-shadow:0 4px 16px var(--Ag);display:none;align-items:center;justify-content:center;cursor:pointer;font-size:16px;z-index:10;transition:var(--ease);touch-action:manipulation}
 .sfab.show{display:flex}
 .sfab:hover{background:var(--A2)}
 
 /* ── INPUT AREA ── */
-.inp-wrap{flex:0 0 auto;padding:10px 12px;border-top:1px solid var(--line);background:var(--sf);position:relative}
-/* emoji popup */
-.ep-pop{position:absolute;bottom:calc(100% + 6px);left:12px;background:var(--sf);border:1px solid var(--line2);border-radius:14px;padding:10px;box-shadow:0 8px 32px rgba(60,40,20,0.15);display:none;z-index:200;width:min(296px,90vw)}
+.inp-wrap{flex:0 0 auto;padding:10px 12px;border-top:1px solid var(--line);background:rgba(10,10,15,0.85);backdrop-filter:blur(12px);position:relative}
+.ep-pop{position:absolute;bottom:calc(100% + 6px);left:12px;background:var(--sf);border:1px solid var(--line2);border-radius:14px;padding:10px;box-shadow:0 8px 32px rgba(0,0,0,0.5);display:none;z-index:200;width:min(296px,90vw)}
 .ep-pop.open{display:block}
 .ep-grid{display:grid;grid-template-columns:repeat(8,1fr);gap:2px;max-height:160px;overflow-y:auto}
 .ep{font-size:20px;cursor:pointer;padding:5px;border-radius:7px;text-align:center;transition:var(--ease);touch-action:manipulation;line-height:1}
@@ -209,18 +206,18 @@ html,body{height:100%;overflow:hidden;background:var(--bg);color:var(--ink);font
 .inp-row{display:flex;align-items:flex-end;gap:8px}
 .em-btn{width:38px;height:38px;border-radius:10px;flex:0 0 38px;border:1.5px solid var(--line);background:transparent;color:var(--ink3);font-size:19px;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:var(--ease);touch-action:manipulation}
 .em-btn:hover{background:var(--bg2);border-color:var(--line2)}
-.chat-in{flex:1;padding:11px 14px;background:var(--bg);border:1.5px solid var(--line);border-radius:10px;color:var(--ink);font-family:var(--mono);font-size:14px;outline:none;resize:none;min-height:42px;max-height:120px;line-height:1.55;transition:var(--ease);-webkit-appearance:none}
+.chat-in{flex:1;padding:11px 14px;background:var(--bg2);border:1.5px solid var(--line);border-radius:10px;color:var(--ink);font-family:var(--mono);font-size:14px;outline:none;resize:none;min-height:42px;max-height:120px;line-height:1.55;transition:var(--ease);-webkit-appearance:none}
 .chat-in:focus{border-color:var(--A);background:var(--sf);box-shadow:0 0 0 3px var(--As)}
 .chat-in::placeholder{color:var(--ink4)}
-.snd-btn{width:42px;height:42px;border-radius:10px;flex:0 0 42px;border:none;background:var(--A);color:#fff;cursor:pointer;display:flex;align-items:center;justify-content:center;box-shadow:0 2px 8px var(--Ag);transition:var(--ease);touch-action:manipulation}
-.snd-btn:hover{background:var(--A2);box-shadow:0 4px 14px var(--Ag)}
+.snd-btn{width:42px;height:42px;border-radius:10px;flex:0 0 42px;border:1.5px solid rgba(96,165,250,0.3);background:var(--As);color:var(--A);cursor:pointer;display:flex;align-items:center;justify-content:center;box-shadow:0 2px 8px var(--Ag);transition:var(--ease);touch-action:manipulation}
+.snd-btn:hover{background:rgba(96,165,250,0.22);border-color:rgba(96,165,250,0.55);color:var(--A2)}
 .snd-btn:active{transform:scale(.9)}
 .snd-btn svg{width:16px;height:16px}
 
 /* ── GROUP MODAL ── */
-.overlay{position:fixed;inset:0;z-index:800;background:rgba(30,20,10,0.4);display:none;align-items:center;justify-content:center;padding:16px}
+.overlay{position:fixed;inset:0;z-index:800;background:rgba(0,0,0,0.65);backdrop-filter:blur(6px);display:none;align-items:center;justify-content:center;padding:16px}
 .overlay.open{display:flex}
-.modal{background:var(--sf);border:1px solid var(--line2);border-radius:22px;padding:26px;width:min(420px,100%);box-shadow:0 16px 60px rgba(60,40,20,0.2);max-height:90vh;overflow-y:auto}
+.modal{background:var(--sf);border:1px solid var(--line2);border-radius:22px;padding:26px;width:min(420px,100%);box-shadow:0 16px 60px rgba(0,0,0,0.6);max-height:90vh;overflow-y:auto}
 .m-title{font-family:var(--serif);font-size:22px;font-weight:600;color:var(--ink);margin-bottom:4px}
 .m-sub{font-size:12px;color:var(--ink3);margin-bottom:20px}
 .m-lbl{font-size:10px;letter-spacing:1.2px;text-transform:uppercase;color:var(--ink3);margin-bottom:8px}
@@ -235,8 +232,8 @@ html,body{height:100%;overflow:hidden;background:var(--bg);color:var(--ink);font
 .mbtn{padding:11px 20px;border-radius:10px;font-family:var(--mono);font-size:12px;font-weight:600;cursor:pointer;transition:var(--ease);touch-action:manipulation}
 .mbtn.cn{background:transparent;border:1.5px solid var(--line);color:var(--ink3)}
 .mbtn.cn:hover{background:var(--bg2)}
-.mbtn.ok{background:var(--A);border:none;color:#fff;box-shadow:0 2px 8px var(--Ag)}
-.mbtn.ok:hover{background:var(--A2)}
+.mbtn.ok{background:var(--As);border:1.5px solid rgba(96,165,250,0.3);color:var(--A)}
+.mbtn.ok:hover{background:rgba(96,165,250,0.22);color:var(--A2)}
 .m-err{font-size:11px;color:var(--R);min-height:16px;margin-bottom:10px}
 
 .spin{display:inline-block;width:20px;height:20px;border:2.5px solid var(--line);border-top-color:var(--A);border-radius:50%;animation:sp .7s linear infinite}
@@ -251,14 +248,15 @@ html,body{height:100%;overflow:hidden;background:var(--bg);color:var(--ink);font
 <div id="setup">
   <div class="setup-box">
     <div class="s-logo">Ascen<em>Chat</em></div>
-    <div class="s-sub">Messages · Groups · Always saved</div>
+    <div class="s-sub">Schoolwide · Free · No code needed</div>
     <div class="s-card">
       <div class="s-lbl">Your display name</div>
       <input class="s-in" id="nameIn" type="text" maxlength="24" placeholder="e.g. luna_84" autocomplete="off" autocorrect="off" autocapitalize="off">
       <label class="s-rem"><input type="checkbox" id="remMe" checked> Remember me on this device</label>
-      <button class="s-btn" id="joinBtn">✨ Enter AscentChat</button>
+      <button class="s-btn" id="joinBtn">Enter AscentChat</button>
       <div class="s-err" id="sErr"></div>
     </div>
+
   </div>
 </div>
 
@@ -270,6 +268,7 @@ html,body{height:100%;overflow:hidden;background:var(--bg);color:var(--ink);font
     </button>
     <span class="tb-brand">Ascen<em>Chat</em></span>
     <span class="tb-grow"></span>
+
     <div class="tb-chip tb-notify">
       <div class="tb-av" id="myAv">?</div>
       <span id="myNameDisp">—</span>
@@ -363,14 +362,12 @@ const TS=()=>firebase.firestore.FieldValue.serverTimestamp();
 let myUid=null, myName=null;
 let activeId=null, activeType=null, activeName=null, activePeer=null;
 let unsubMsgs=null, unsubGroups=null;
-let allUsers=[];       // [{uid,name,lastSeen}]
-let myGroups=[];       // [{id,name,members,updatedAt,lastMsg}]
+let allUsers=[];
+let myGroups=[];
 let tab='dm';
 let sbOpen=false;
 
-// unread tracking: {convId: {count, preview, fromName}}
 let unread={};
-// seen message IDs (persisted in sessionStorage for this session)
 let seenSet=new Set(JSON.parse(sessionStorage.getItem('ac_seen')||'[]'));
 function saveSeen(){try{sessionStorage.setItem('ac_seen',JSON.stringify([...seenSet].slice(-400)));}catch(e){}}
 
@@ -394,8 +391,7 @@ function ago(ts){
 
 // ─── Sidebar ───
 $('sbBtn').onclick=()=>sbOpen?closeSb():openSb();
-function isMobile(){return window.innerWidth<=768}
-function openSb(){sbOpen=true;$('sidebar').classList.remove('closed');if(isMobile())$('sbVeil').style.display='block'}
+function openSb(){sbOpen=true;$('sidebar').classList.remove('closed');$('sbVeil').style.display=''}
 function closeSb(){sbOpen=false;$('sidebar').classList.add('closed');$('sbVeil').style.display='none'}
 function goBack(){closeSb();$('chatBody').style.display='none';$('chatPh').style.display='flex';activeId=null;activeType=null}
 
@@ -421,7 +417,6 @@ async function doJoin(){
   try{
     const cred=await auth.signInAnonymously();
     myUid=cred.user.uid; myName=name;
-    // Check name uniqueness
     const snap=await db.collection('users').where('name','==',name).get();
     if(snap.docs.some(d=>d.id!==myUid)){setErr('Name taken, try another.');reset();return}
     await db.collection('users').doc(myUid).set({name,uid:myUid,lastSeen:TS()},{merge:true});
@@ -430,13 +425,12 @@ async function doJoin(){
     $('myAv').textContent=ini(name);
     $('setup').style.display='none';
     $('app').classList.add('live');
-    // On desktop open sidebar by default; on mobile keep closed
     if(window.innerWidth>768)openSb();
     startApp();
   }catch(e){console.error(e);setErr('Connection error, try again.');reset()}
 }
 function setErr(msg,c='var(--R)'){$('sErr').textContent=msg;$('sErr').style.color=c}
-function reset(){$('joinBtn').disabled=false;$('joinBtn').textContent='✨ Enter AscentChat'}
+function reset(){$('joinBtn').disabled=false;$('joinBtn').textContent='Enter AscentChat'}
 
 // ─── App start ───
 function startApp(){
@@ -447,25 +441,23 @@ function startApp(){
 }
 function hb(){if(myUid)db.collection('users').doc(myUid).update({lastSeen:TS()}).catch(()=>{})}
 
-// ─── Users listener (real-time) ───
+// ─── Users listener ───
 function listenUsers(){
   db.collection('users').onSnapshot(snap=>{
     allUsers=[];
     snap.forEach(d=>{const u=d.data();if(u.uid!==myUid)allUsers.push(u)});
     allUsers.sort((a,b)=>(a.name||'').localeCompare(b.name||''));
     renderList();
-    // start group ping listeners once we have users
     startGroupPingListeners();
   });
 }
 
-// ─── Groups listener (real-time, no orderBy so no index needed) ───
+// ─── Groups listener ───
 function listenMyGroups(){
   if(unsubGroups)unsubGroups();
   unsubGroups=db.collection('groups').where('members','array-contains',myUid)
     .onSnapshot(snap=>{
       myGroups=snap.docs.map(d=>({id:d.id,...d.data()}));
-      // sort by updatedAt client-side
       myGroups.sort((a,b)=>{
         const ta=a.updatedAt&&a.updatedAt.toDate?a.updatedAt.toDate().getTime():0;
         const tb=b.updatedAt&&b.updatedAt.toDate?b.updatedAt.toDate().getTime():0;
@@ -516,7 +508,6 @@ function renderList(){
       list.appendChild(el);
     });
   } else {
-    // Groups tab
     let groups=q?myGroups.filter(g=>(g.name||'').toLowerCase().includes(q)):myGroups;
     if(!groups.length){
       list.innerHTML='<div class="c-empty">No group chats yet.<br>Create one! 🎉</div>';
@@ -551,10 +542,9 @@ function updateGlobalBadge(){
   const badge=$('globalBadge');
   if(total>0){badge.textContent=total>99?'99+':total;badge.classList.add('show')}
   else badge.classList.remove('show');
-  document.title=total>0?`(${total}) AscentChat`:'AscentChat';
+  document.title=total>0?`(${total}) AscentChat`:'AscentChat · ASCENTA 3';
 }
 
-// Mark a conversation as read
 function markRead(cid){
   if(unread[cid]){delete unread[cid];renderList()}
 }
@@ -598,14 +588,11 @@ function mountChat(av,name,sub){
 
   let firstLoad=true;
   unsubMsgs=colRef.onSnapshot(snap=>{
-    // Ping logic for messages that arrive while chat is open
     snap.docChanges().forEach(ch=>{
       if(ch.type==='added'){
         const m=ch.doc.data(), mid=ch.doc.id;
         seenSet.add(mid); saveSeen();
-        // If this is a new message from someone else, toast it (but since we're looking at the chat, just update sidebar)
         if(!firstLoad && m.from!==myUid){
-          // We're currently viewing this conv, so just mark read instantly
           markRead(activeId);
         }
       }
@@ -658,7 +645,6 @@ function renderMsgs(msgs){
         ${rHtml?`<div class="rxns">${rHtml}</div>`:''}
         <div class="m-time">${fmtT(m.timestamp)}</div>
       </div>`;
-    // Long-press for react bar on touch
     const bw=row.querySelector('.bw');
     let lpt;
     bw.addEventListener('touchstart',()=>{lpt=setTimeout(()=>{bw.classList.add('rbar-open');document.addEventListener('touchstart',()=>bw.classList.remove('rbar-open'),{once:true})},500)},{passive:true});
@@ -708,21 +694,16 @@ async function sendMsg(){
       await db.collection('conversations').doc(activeId).collection('messages').add(payload);
     } else {
       await db.collection('groups').doc(activeId).collection('messages').add(payload);
-      // update group metadata (no orderBy index needed - we sort client side)
       await db.collection('groups').doc(activeId).update({updatedAt:TS(),lastMsg:text});
     }
   }catch(e){console.error('Send error:',e)}
 }
 
 // ─── Global ping listeners ───
-// For DMs: collectionGroup query on 'to' field
-// For groups: per-group subcollection listeners
 let groupPingUnsubs={};
 let dmPingUnsub=null;
-let pingListenersStarted=false;
 
 function startGroupPingListeners(){
-  // Start DM ping listener once
   if(!dmPingUnsub&&myUid){
     dmPingUnsub=db.collectionGroup('messages')
       .where('to','==',myUid)
@@ -744,9 +725,8 @@ function startGroupPingListeners(){
         });
       },err=>console.error('DM ping listener:',err));
   }
-  // Group ping listeners — one per group
   myGroups.forEach(g=>{
-    if(groupPingUnsubs[g.id])return; // already listening
+    if(groupPingUnsubs[g.id])return;
     groupPingUnsubs[g.id]=db.collection('groups').doc(g.id).collection('messages')
       .orderBy('timestamp','desc').limit(10)
       .onSnapshot(snap=>{
@@ -762,7 +742,6 @@ function startGroupPingListeners(){
             }
           }
         });
-        // Refresh group list to update last message preview
         if(tab==='grp')renderList();
       },err=>console.error('Group ping listener:',err));
   });
@@ -777,11 +756,9 @@ function bumpUnread(cid,fromName,text,groupName){
 }
 
 function showToast(from,text,cid,type,peerUid,peerName,groupName){
-  // Flash title
   let orig=document.title,fl=true;
   const ti=setInterval(()=>{document.title=fl?`🔔 ${from}: ${text.slice(0,20)}`:orig;fl=!fl},700);
   setTimeout(()=>{clearInterval(ti);updateGlobalBadge()},8000);
-  // Soft ping sound
   try{
     const ctx=new(window.AudioContext||window.webkitAudioContext)();
     const o=ctx.createOscillator(),g=ctx.createGain();
@@ -793,7 +770,6 @@ function showToast(from,text,cid,type,peerUid,peerName,groupName){
     g.gain.linearRampToValueAtTime(0,ctx.currentTime+0.3);
     o.start();o.stop(ctx.currentTime+0.35);
   }catch(e){}
-  // Build toast
   const t=document.createElement('div');
   t.className='toast';
   const label=groupName?`${from} in ${groupName}`:from;
@@ -857,7 +833,6 @@ async function createGroup(){
       updatedAt:TS(),
       lastMsg:''
     });
-    // Add system welcome message
     await db.collection('groups').doc(ref.id).collection('messages').add({
       system:true,
       text:`${myName} created "${name}" 🎉`,
@@ -870,7 +845,6 @@ async function createGroup(){
   }catch(e){$('grpErr').textContent='Error: '+e.message;console.error(e)}
 }
 
-// Close modal on backdrop tap
 $('grpOv').addEventListener('click',e=>{if(e.target===$('grpOv'))closeGM()});
 </script>
 </body>
