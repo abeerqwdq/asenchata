@@ -1,4 +1,4 @@
-F<!doctype html>
+<!doctype html>
 <html lang="en">
 <head>
 <meta charset="utf-8">
@@ -29,12 +29,13 @@ html,body{height:100%;overflow:hidden;background:var(--bg);color:var(--ink);font
 .toast.bye{animation:tOUT .2s ease-in forwards}
 @keyframes tIN{from{opacity:0;transform:translateX(50px) scale(.9)}to{opacity:1;transform:none}}
 @keyframes tOUT{to{opacity:0;transform:translateX(50px) scale(.9)}}
-.t-av{width:34px;height:34px;border-radius:9px;display:flex;align-items:center;justify-content:center;font-size:14px;font-weight:700;flex:0 0 34px;background:var(--As);color:var(--A)}
+.t-av{width:34px;height:34px;border-radius:9px;display:flex;align-items:center;justify-content:center;font-size:14px;font-weight:700;flex:0 0 34px;background:var(--As);color:var(--A);overflow:hidden}
+.t-av img{width:100%;height:100%;object-fit:cover;border-radius:9px}
 .t-body .t-who{font-size:12px;font-weight:600;color:var(--ink)}
 .t-body .t-msg{font-size:11px;color:var(--ink3);margin-top:2px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;max-width:200px}
 
 /* ── SETUP ── */
-#setup{position:fixed;inset:0;z-index:500;display:flex;align-items:center;justify-content:center;background:var(--bg);padding:16px}
+#setup{position:fixed;inset:0;z-index:500;display:flex;align-items:center;justify-content:center;background:var(--bg);padding:16px;overflow-y:auto}
 .setup-box{width:min(420px,100%);display:flex;flex-direction:column;align-items:center}
 .s-logo{font-family:var(--serif);font-size:48px;font-weight:600;color:var(--ink);letter-spacing:-2.5px;line-height:1;margin-bottom:4px}
 .s-logo em{color:var(--A);font-style:normal}
@@ -44,6 +45,18 @@ html,body{height:100%;overflow:hidden;background:var(--bg);color:var(--ink);font
 .s-in{width:100%;padding:13px 15px;background:var(--bg);border:1.5px solid var(--line2);border-radius:10px;color:var(--ink);font-family:var(--mono);font-size:15px;outline:none;transition:var(--ease);margin-bottom:14px;-webkit-appearance:none}
 .s-in:focus{border-color:var(--A);box-shadow:0 0 0 3px var(--As)}
 .s-in::placeholder{color:var(--ink4)}
+.s-tabs{display:flex;gap:3px;background:var(--bg2);border-radius:9px;padding:3px;margin-bottom:18px}
+.s-tab{flex:1;padding:9px 4px;text-align:center;font-size:11px;letter-spacing:.5px;text-transform:uppercase;font-weight:500;color:var(--ink3);border-radius:7px;cursor:pointer;transition:var(--ease);user-select:none}
+.s-tab.on{background:var(--sf);color:var(--A);box-shadow:0 1px 4px rgba(0,0,0,0.3)}
+
+/* PFP grid */
+.pfp-section{margin-bottom:16px}
+.pfp-lbl{font-size:10px;letter-spacing:1.4px;text-transform:uppercase;color:var(--ink3);margin-bottom:10px}
+.pfp-grid{display:grid;grid-template-columns:repeat(6,1fr);gap:8px}
+.pfp-opt{width:100%;aspect-ratio:1;border-radius:10px;cursor:pointer;font-size:22px;display:flex;align-items:center;justify-content:center;background:var(--bg);border:2px solid var(--line);transition:var(--ease);touch-action:manipulation;user-select:none}
+.pfp-opt:hover{border-color:var(--A);background:var(--As)}
+.pfp-opt.sel{border-color:var(--A);background:var(--As);box-shadow:0 0 0 3px var(--Ag)}
+
 .s-rem{display:flex;align-items:center;gap:8px;font-size:12px;color:var(--ink3);margin-bottom:16px;cursor:pointer;user-select:none}
 .s-rem input{accent-color:var(--A);width:16px;height:16px;cursor:pointer}
 .s-btn{width:100%;padding:14px;background:var(--As);color:var(--A);border:1.5px solid rgba(96,165,250,0.3);border-radius:10px;font-family:var(--mono);font-size:13px;letter-spacing:1px;font-weight:600;cursor:pointer;transition:var(--ease);touch-action:manipulation}
@@ -52,6 +65,8 @@ html,body{height:100%;overflow:hidden;background:var(--bg);color:var(--ink);font
 .s-back{display:block;margin-bottom:16px;font-size:11px;color:var(--ink3);text-decoration:none;letter-spacing:.5px;transition:var(--ease)}
 .s-back:hover{color:var(--A)}
 .s-err{margin-top:12px;font-size:12px;min-height:18px;color:var(--R)}
+.s-divider{display:flex;align-items:center;gap:10px;margin-bottom:14px;font-size:10px;color:var(--ink4);letter-spacing:1px;text-transform:uppercase}
+.s-divider::before,.s-divider::after{content:'';flex:1;height:1px;background:var(--line)}
 
 /* ── APP ── */
 #app{display:none;height:100%;flex-direction:column}
@@ -67,8 +82,10 @@ html,body{height:100%;overflow:hidden;background:var(--bg);color:var(--ink);font
 .tb-home{font-size:11px;color:var(--ink3);letter-spacing:.5px;text-decoration:none;padding:6px 10px;border:1px solid var(--line);border-radius:8px;transition:var(--ease)}
 .tb-home:hover{color:var(--A);border-color:rgba(96,165,250,0.3)}
 .tb-grow{flex:1}
-.tb-chip{display:flex;align-items:center;gap:7px;padding:6px 12px;border-radius:100px;background:var(--As);font-size:11px;color:var(--A);font-weight:600}
-.tb-av{width:22px;height:22px;border-radius:5px;background:var(--A);color:#000;display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:800}
+.tb-chip{display:flex;align-items:center;gap:7px;padding:6px 12px;border-radius:100px;background:var(--As);font-size:11px;color:var(--A);font-weight:600;cursor:pointer;transition:var(--ease)}
+.tb-chip:hover{background:rgba(96,165,250,0.2);box-shadow:0 0 0 1.5px rgba(96,165,250,0.35)}
+.tb-av{width:22px;height:22px;border-radius:5px;background:var(--A);color:#000;display:flex;align-items:center;justify-content:center;font-size:14px;overflow:hidden;flex:0 0 22px}
+.tb-av img{width:100%;height:100%;object-fit:cover}
 .tb-notify{position:relative}
 .tb-nbadge{position:absolute;top:-4px;right:-4px;width:14px;height:14px;border-radius:50%;background:var(--R);color:#fff;font-size:8px;font-weight:800;display:none;align-items:center;justify-content:center;border:2px solid var(--sf)}
 .tb-nbadge.show{display:flex}
@@ -77,31 +94,16 @@ html,body{height:100%;overflow:hidden;background:var(--bg);color:var(--ink);font
 .main{flex:1;display:flex;overflow:hidden;position:relative}
 
 /* ── SIDEBAR ── */
-.sidebar{
-  width:var(--sw);flex:0 0 var(--sw);
-  background:var(--bg3);border-right:1px solid var(--line);
-  display:flex;flex-direction:column;overflow:hidden;
-  transition:width var(--ease),flex-basis var(--ease);
-  z-index:50;position:relative;
-}
+.sidebar{width:var(--sw);flex:0 0 var(--sw);background:var(--bg3);border-right:1px solid var(--line);display:flex;flex-direction:column;overflow:hidden;transition:width var(--ease),flex-basis var(--ease);z-index:50;position:relative}
 .sidebar.closed{width:0;flex-basis:0;overflow:hidden}
-
 @media(max-width:768px){
-  .sidebar{
-    position:absolute;top:0;left:0;bottom:0;
-    width:var(--sw) !important;flex:none !important;
-    box-shadow:0 0 40px rgba(0,0,0,0.6);
-    transform:translateX(0);
-    transition:transform var(--ease);
-  }
+  .sidebar{position:absolute;top:0;left:0;bottom:0;width:var(--sw) !important;flex:none !important;box-shadow:0 0 40px rgba(0,0,0,0.6);transform:translateX(0);transition:transform var(--ease)}
   .sidebar.closed{transform:translateX(calc(-1 * var(--sw)));width:var(--sw) !important;flex:none !important}
   .sb-veil{display:block !important}
 }
 @media(min-width:600px) and (max-width:768px){:root{--sw:240px}}
 @media(max-width:599px){:root{--sw:88vw}}
-
 .sb-veil{display:none;position:absolute;inset:0;z-index:49;background:rgba(0,0,0,0.5);backdrop-filter:blur(2px);touch-action:none}
-
 .sb-head{padding:12px 12px 10px;border-bottom:1px solid var(--line);display:flex;flex-direction:column;gap:8px;flex:0 0 auto}
 .sb-search{width:100%;padding:10px 12px;background:var(--bg);border:1.5px solid var(--line);border-radius:10px;color:var(--ink);font-family:var(--mono);font-size:13px;outline:none;transition:var(--ease);-webkit-appearance:none}
 .sb-search:focus{border-color:var(--A);background:var(--sf)}
@@ -113,16 +115,15 @@ html,body{height:100%;overflow:hidden;background:var(--bg);color:var(--ink);font
 .ng-btn.show{display:block}
 .ng-btn:hover{background:rgba(96,165,250,0.22)}
 .ng-btn:active{transform:scale(.97)}
-
 .conv-list{flex:1;overflow-y:auto;overflow-x:hidden;padding:6px 8px;display:flex;flex-direction:column;gap:1px;-webkit-overflow-scrolling:touch}
 .conv-list::-webkit-scrollbar{width:3px}
 .conv-list::-webkit-scrollbar-thumb{background:var(--line2);border-radius:2px}
-
 .ci{display:flex;align-items:center;gap:9px;padding:11px 10px;border-radius:11px;cursor:pointer;transition:var(--ease);touch-action:manipulation;-webkit-user-select:none;user-select:none}
 .ci:hover,.ci:active{background:var(--bg2)}
 .ci.on{background:var(--As)}
-.ci-av{width:40px;height:40px;border-radius:11px;display:flex;align-items:center;justify-content:center;font-size:16px;font-weight:700;flex:0 0 40px;background:var(--bg2);color:var(--ink3);border:1.5px solid var(--line);transition:var(--ease);position:relative}
-.ci.on .ci-av{background:var(--A);color:#000;border-color:transparent}
+.ci-av{width:40px;height:40px;border-radius:11px;display:flex;align-items:center;justify-content:center;font-size:18px;flex:0 0 40px;background:var(--bg2);border:1.5px solid var(--line);transition:var(--ease);position:relative;overflow:hidden}
+.ci-av img{width:100%;height:100%;object-fit:cover}
+.ci.on .ci-av{border-color:transparent;box-shadow:0 0 0 2px var(--A)}
 .ci-dot{position:absolute;bottom:-2px;right:-2px;width:11px;height:11px;border-radius:50%;background:var(--G);border:2.5px solid var(--bg3)}
 .ci.on .ci-dot{border-color:var(--As)}
 .ci-info{flex:1;min-width:0}
@@ -143,9 +144,9 @@ html,body{height:100%;overflow:hidden;background:var(--bg);color:var(--ink);font
 .chat-ph-ico{font-size:48px;opacity:.18;animation:bob 3s ease-in-out infinite}
 @keyframes bob{0%,100%{transform:translateY(0)}50%{transform:translateY(-8px)}}
 .chat-ph-txt{font-size:12px;color:var(--ink4);letter-spacing:.5px;text-align:center}
-
 .chat-hdr{height:54px;flex:0 0 54px;display:flex;align-items:center;gap:11px;padding:0 16px;background:rgba(12,12,18,0.8);backdrop-filter:blur(12px);border-bottom:1px solid var(--line)}
-.ch-av{width:34px;height:34px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:15px;font-weight:700;background:var(--As);color:var(--A);border:1.5px solid rgba(96,165,250,0.2);flex:0 0 34px}
+.ch-av{width:34px;height:34px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:18px;background:var(--As);border:1.5px solid rgba(96,165,250,0.2);flex:0 0 34px;overflow:hidden}
+.ch-av img{width:100%;height:100%;object-fit:cover}
 .ch-info{flex:1;min-width:0}
 .ch-name{font-size:14px;font-weight:600;color:var(--ink);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .ch-sub{font-size:10px;color:var(--ink3);margin-top:1px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
@@ -157,28 +158,21 @@ html,body{height:100%;overflow:hidden;background:var(--bg);color:var(--ink);font
 .msgs::-webkit-scrollbar{width:4px}
 .msgs::-webkit-scrollbar-thumb{background:var(--line2);border-radius:2px}
 @media(max-width:500px){.msgs{padding:12px 10px}}
-
 .day-lbl{text-align:center;font-size:10px;letter-spacing:1px;text-transform:uppercase;color:var(--ink4);margin:14px 0 8px;display:flex;align-items:center;gap:10px}
 .day-lbl::before,.day-lbl::after{content:'';flex:1;height:1px;background:var(--line)}
-
 .mrow{display:flex;align-items:flex-end;gap:7px;margin-bottom:2px}
 .mrow.me{flex-direction:row-reverse}
 .mrow.sys{justify-content:center;margin:8px 0}
 .sys-pill{font-size:11px;color:var(--ink3);background:var(--bg2);padding:5px 14px;border-radius:100px;border:1px solid var(--line)}
-.m-av{width:28px;height:28px;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;flex:0 0 28px;background:var(--bg2);color:var(--ink3);border:1px solid var(--line)}
+.m-av{width:28px;height:28px;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:13px;flex:0 0 28px;background:var(--bg2);border:1px solid var(--line);overflow:hidden}
+.m-av img{width:100%;height:100%;object-fit:cover}
 .m-av.hide{visibility:hidden}
 .m-body{display:flex;flex-direction:column;max-width:min(72%,480px)}
 @media(max-width:500px){.m-body{max-width:85%}}
 .mrow.me .m-body{align-items:flex-end}
 .m-sender{font-size:10px;color:var(--ink3);margin-bottom:3px;padding-left:2px}
 .bw{position:relative}
-.react-bar{
-  display:none;position:absolute;z-index:60;
-  bottom:calc(100% + 6px);
-  background:var(--sf);border:1px solid var(--line2);
-  border-radius:14px;padding:8px 10px;gap:4px;
-  box-shadow:0 8px 32px rgba(0,0,0,0.5);white-space:nowrap;
-}
+.react-bar{display:none;position:absolute;z-index:60;bottom:calc(100% + 6px);background:var(--sf);border:1px solid var(--line2);border-radius:14px;padding:8px 10px;gap:4px;box-shadow:0 8px 32px rgba(0,0,0,0.5);white-space:nowrap}
 .mrow:not(.me) .react-bar{left:0}
 .mrow.me .react-bar{right:0}
 .bw:hover .react-bar{display:flex}
@@ -188,13 +182,13 @@ html,body{height:100%;overflow:hidden;background:var(--bg);color:var(--ink);font
 .bubble{padding:10px 14px;border-radius:17px;font-size:14px;line-height:1.6;word-break:break-word;white-space:pre-wrap}
 .mrow:not(.me) .bubble{background:rgba(25,25,35,0.9);border:1px solid var(--line);color:var(--ink);border-bottom-left-radius:4px}
 .mrow.me .bubble{background:rgba(96,165,250,0.18);border:1px solid rgba(96,165,250,0.3);color:#e0eeff;border-bottom-right-radius:4px;box-shadow:0 2px 10px var(--Ag)}
+.bubble.is-gif{padding:4px;background:transparent !important;border:none !important;box-shadow:none !important}
+.bubble.is-gif img{max-width:220px;max-height:200px;border-radius:12px;display:block}
 .rxns{display:flex;gap:4px;margin-top:5px;flex-wrap:wrap}
 .rxn{font-size:13px;padding:3px 8px;background:var(--bg2);border:1px solid var(--line);border-radius:100px;cursor:pointer;transition:var(--ease);display:flex;align-items:center;gap:3px;touch-action:manipulation}
 .rxn:hover{background:var(--bg);border-color:var(--A)}
 .rxn span{font-size:10px;color:var(--ink3)}
 .m-time{font-size:10px;color:var(--ink4);margin-top:4px;padding:0 2px}
-
-/* Scroll FAB */
 .sfab{position:absolute;bottom:86px;right:14px;width:36px;height:36px;border-radius:50%;background:var(--A);color:#000;border:none;box-shadow:0 4px 16px var(--Ag);display:none;align-items:center;justify-content:center;cursor:pointer;font-size:16px;z-index:10;transition:var(--ease);touch-action:manipulation}
 .sfab.show{display:flex}
 .sfab:hover{background:var(--A2)}
@@ -206,9 +200,24 @@ html,body{height:100%;overflow:hidden;background:var(--bg);color:var(--ink);font
 .ep-grid{display:grid;grid-template-columns:repeat(8,1fr);gap:2px;max-height:160px;overflow-y:auto}
 .ep{font-size:20px;cursor:pointer;padding:5px;border-radius:7px;text-align:center;transition:var(--ease);touch-action:manipulation;line-height:1}
 .ep:hover,.ep:active{background:var(--bg2);transform:scale(1.1)}
-.inp-row{display:flex;align-items:flex-end;gap:8px}
-.em-btn{width:38px;height:38px;border-radius:10px;flex:0 0 38px;border:1.5px solid var(--line);background:transparent;color:var(--ink3);font-size:19px;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:var(--ease);touch-action:manipulation}
-.em-btn:hover{background:var(--bg2);border-color:var(--line2)}
+
+/* GIF panel */
+.gif-pop{position:absolute;bottom:calc(100% + 6px);left:58px;background:var(--sf);border:1px solid var(--line2);border-radius:14px;padding:12px;box-shadow:0 8px 32px rgba(0,0,0,0.5);display:none;z-index:200;width:min(320px,92vw)}
+.gif-pop.open{display:block}
+.gif-search{width:100%;padding:9px 12px;background:var(--bg);border:1.5px solid var(--line);border-radius:9px;color:var(--ink);font-family:var(--mono);font-size:13px;outline:none;margin-bottom:10px;transition:var(--ease);-webkit-appearance:none}
+.gif-search:focus{border-color:var(--A);background:var(--bg2)}
+.gif-search::placeholder{color:var(--ink4)}
+.gif-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:6px;max-height:200px;overflow-y:auto}
+.gif-item{border-radius:8px;overflow:hidden;cursor:pointer;background:var(--bg2);aspect-ratio:16/9;transition:var(--ease)}
+.gif-item:hover{transform:scale(1.03);box-shadow:0 4px 14px rgba(0,0,0,0.5)}
+.gif-item img{width:100%;height:100%;object-fit:cover;display:block}
+.gif-loading{text-align:center;padding:20px;font-size:12px;color:var(--ink4)}
+.gif-attr{font-size:9px;color:var(--ink4);text-align:right;margin-top:6px;letter-spacing:.5px}
+
+.inp-row{display:flex;align-items:flex-end;gap:6px}
+.em-btn,.gif-btn{width:36px;height:36px;border-radius:10px;flex:0 0 36px;border:1.5px solid var(--line);background:transparent;color:var(--ink3);font-size:17px;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:var(--ease);touch-action:manipulation}
+.em-btn:hover,.gif-btn:hover{background:var(--bg2);border-color:var(--line2)}
+.gif-btn{font-size:12px;font-weight:700;letter-spacing:-.5px;color:var(--ink3)}
 .chat-in{flex:1;padding:11px 14px;background:var(--bg2);border:1.5px solid var(--line);border-radius:10px;color:var(--ink);font-family:var(--mono);font-size:14px;outline:none;resize:none;min-height:42px;max-height:120px;line-height:1.55;transition:var(--ease);-webkit-appearance:none}
 .chat-in:focus{border-color:var(--A);background:var(--sf);box-shadow:0 0 0 3px var(--As)}
 .chat-in::placeholder{color:var(--ink4)}
@@ -238,16 +247,17 @@ html,body{height:100%;overflow:hidden;background:var(--bg);color:var(--ink);font
 .mbtn.ok{background:var(--As);border:1.5px solid rgba(96,165,250,0.3);color:var(--A)}
 .mbtn.ok:hover{background:rgba(96,165,250,0.22);color:var(--A2)}
 .m-err{font-size:11px;color:var(--R);min-height:16px;margin-bottom:10px}
-
 .spin{display:inline-block;width:20px;height:20px;border:2.5px solid var(--line);border-top-color:var(--A);border-radius:50%;animation:sp .7s linear infinite}
 @keyframes sp{to{transform:rotate(360deg)}}
 
 /* ── RENAME POPOVER ── */
-.tb-chip{cursor:pointer;transition:var(--ease)}
-.tb-chip:hover{background:rgba(96,165,250,0.2);box-shadow:0 0 0 1.5px rgba(96,165,250,0.35)}
-#renamePop{position:fixed;top:60px;right:14px;background:var(--sf);border:1px solid var(--line2);border-radius:14px;padding:14px;box-shadow:0 8px 32px rgba(0,0,0,0.5);display:none;z-index:300;width:220px}
+#renamePop{position:fixed;top:60px;right:14px;background:var(--sf);border:1px solid var(--line2);border-radius:14px;padding:14px;box-shadow:0 8px 32px rgba(0,0,0,0.5);display:none;z-index:300;width:260px}
 #renamePop.open{display:block}
 #renamePop .rp-lbl{font-size:9px;letter-spacing:1.2px;text-transform:uppercase;color:var(--ink3);margin-bottom:7px}
+.rp-pfp-grid{display:grid;grid-template-columns:repeat(6,1fr);gap:6px;margin-bottom:12px}
+.rp-pfp-opt{width:100%;aspect-ratio:1;border-radius:8px;cursor:pointer;font-size:18px;display:flex;align-items:center;justify-content:center;background:var(--bg);border:2px solid var(--line);transition:var(--ease);touch-action:manipulation}
+.rp-pfp-opt:hover{border-color:var(--A);background:var(--As)}
+.rp-pfp-opt.sel{border-color:var(--A);background:var(--As);box-shadow:0 0 0 2px var(--Ag)}
 #renameInput{width:100%;padding:9px 12px;background:var(--bg);border:1.5px solid var(--line2);border-radius:8px;color:var(--ink);font-family:var(--mono);font-size:13px;outline:none;margin-bottom:10px;transition:var(--ease);-webkit-appearance:none}
 #renameInput:focus{border-color:var(--A);box-shadow:0 0 0 3px var(--As)}
 #renamePop .rp-row{display:flex;gap:6px}
@@ -269,10 +279,36 @@ html,body{height:100%;overflow:hidden;background:var(--bg);color:var(--ink);font
     <div class="s-logo">Ascen<em>Chat</em></div>
     <div class="s-sub">Schoolwide · Free · No code needed</div>
     <div class="s-card">
-      <div class="s-lbl">Your display name</div>
-      <input class="s-in" id="nameIn" type="text" maxlength="24" placeholder="e.g. luna_84" autocomplete="off" autocorrect="off" autocapitalize="off">
-      <label class="s-rem"><input type="checkbox" id="remMe" checked> Remember me on this device</label>
-      <button class="s-btn" id="joinBtn">Enter AscentChat</button>
+      <div class="s-tabs">
+        <div class="s-tab on" id="tabLogin" onclick="setAuthTab('login')">Sign In</div>
+        <div class="s-tab" id="tabReg" onclick="setAuthTab('register')">Register</div>
+      </div>
+
+      <!-- Login -->
+      <div id="loginForm">
+        <div class="s-lbl">Username</div>
+        <input class="s-in" id="loginUser" type="text" maxlength="24" placeholder="your_username" autocomplete="username" autocorrect="off" autocapitalize="off">
+        <div class="s-lbl">Password</div>
+        <input class="s-in" id="loginPass" type="password" maxlength="64" placeholder="••••••••" autocomplete="current-password">
+        <label class="s-rem"><input type="checkbox" id="remMe" checked> Remember me on this device</label>
+        <button class="s-btn" id="loginBtn">Sign In →</button>
+      </div>
+
+      <!-- Register -->
+      <div id="regForm" style="display:none">
+        <div class="s-lbl">Username</div>
+        <input class="s-in" id="regUser" type="text" maxlength="24" placeholder="pick a username" autocomplete="username" autocorrect="off" autocapitalize="off">
+        <div class="s-lbl">Password</div>
+        <input class="s-in" id="regPass" type="password" maxlength="64" placeholder="choose a password" autocomplete="new-password">
+        <div class="s-lbl">Confirm Password</div>
+        <input class="s-in" id="regPass2" type="password" maxlength="64" placeholder="confirm password" autocomplete="new-password">
+        <div class="pfp-section">
+          <div class="pfp-lbl">Choose your profile picture</div>
+          <div class="pfp-grid" id="pfpGrid"></div>
+        </div>
+        <button class="s-btn" id="regBtn">Create Account ✨</button>
+      </div>
+
       <div class="s-err" id="sErr"></div>
     </div>
     <a class="s-back" href="/">← Back to ASCENTA 3</a>
@@ -287,13 +323,15 @@ html,body{height:100%;overflow:hidden;background:var(--bg);color:var(--ink);font
     </button>
     <span class="tb-brand">Ascen<em>Chat</em></span>
     <span class="tb-grow"></span>
-    <div class="tb-chip tb-notify" onclick="openRename()" title="Click to change name">
-      <div class="tb-av" id="myAv">?</div>
+    <div class="tb-chip tb-notify" onclick="openRename()" title="Click to change name / pfp">
+      <div class="tb-av" id="myAv"></div>
       <span id="myNameDisp">—</span>
       <div class="tb-nbadge" id="globalBadge"></div>
     </div>
   </div>
   <div id="renamePop">
+    <div class="rp-lbl">Change profile picture</div>
+    <div class="rp-pfp-grid" id="rpPfpGrid"></div>
     <div class="rp-lbl">Change display name</div>
     <input id="renameInput" type="text" maxlength="24" placeholder="New name…" autocomplete="off" autocorrect="off" autocapitalize="off">
     <div class="rp-err" id="rpErr"></div>
@@ -327,7 +365,7 @@ html,body{height:100%;overflow:hidden;background:var(--bg);color:var(--ink);font
       <div id="chatBody" style="display:none;flex-direction:column;flex:1;overflow:hidden">
         <div class="chat-hdr">
           <button class="ch-back" id="chBack" onclick="goBack()" aria-label="Back">‹</button>
-          <div class="ch-av" id="chAv">?</div>
+          <div class="ch-av" id="chAv"></div>
           <div class="ch-info">
             <div class="ch-name" id="chName">—</div>
             <div class="ch-sub" id="chSub">—</div>
@@ -337,8 +375,14 @@ html,body{height:100%;overflow:hidden;background:var(--bg);color:var(--ink);font
         <button class="sfab" id="sfab" onclick="scrollBot()" aria-label="Scroll to bottom">↓</button>
         <div class="inp-wrap">
           <div class="ep-pop" id="epPop"></div>
+          <div class="gif-pop" id="gifPop">
+            <input class="gif-search" id="gifSearch" type="text" placeholder="Search GIFs… (powered by Tenor)" autocorrect="off">
+            <div class="gif-grid" id="gifGrid"><div class="gif-loading">Type to search GIFs 🎬</div></div>
+            <div class="gif-attr">Powered by Tenor</div>
+          </div>
           <div class="inp-row">
             <button class="em-btn" id="emBtn" onclick="toggleEp()" aria-label="Emoji">😊</button>
+            <button class="gif-btn" id="gifBtn" onclick="toggleGif()" aria-label="GIF">GIF</button>
             <textarea class="chat-in" id="chatIn" rows="1" placeholder="Message…"></textarea>
             <button class="snd-btn" id="sndBtn" aria-label="Send">
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
@@ -385,18 +429,53 @@ firebase.initializeApp({
 const auth=firebase.auth(), db=firebase.firestore();
 const TS=()=>firebase.firestore.FieldValue.serverTimestamp();
 
+// ─── Profile pictures ───
+const PFP_LIST=['🐶','🐱','🦊','🐻','🐼','🐨','🦁','🐯','🐸','🐧','🦋','🐙','🦄','🐲','🦖','🌸','🌊','⚡','🔥','💎','🚀','🎮','🎵','🍕'];
+let selectedPfp = PFP_LIST[0];
+let rpSelectedPfp = null;
+
+function buildPfpGrids(){
+  // Setup grid
+  const g=$('pfpGrid'); g.innerHTML='';
+  PFP_LIST.forEach((p,i)=>{
+    const b=document.createElement('div');
+    b.className='pfp-opt'+(i===0?' sel':'');
+    b.textContent=p; b.dataset.pfp=p;
+    b.onclick=()=>{
+      selectedPfp=p;
+      g.querySelectorAll('.pfp-opt').forEach(x=>x.classList.remove('sel'));
+      b.classList.add('sel');
+    };
+    g.appendChild(b);
+  });
+
+  // Rename pop grid
+  const rg=$('rpPfpGrid'); rg.innerHTML='';
+  PFP_LIST.forEach(p=>{
+    const b=document.createElement('div');
+    b.className='rp-pfp-opt';
+    b.textContent=p; b.dataset.pfp=p;
+    b.onclick=()=>{
+      rpSelectedPfp=p;
+      rg.querySelectorAll('.rp-pfp-opt').forEach(x=>x.classList.remove('sel'));
+      b.classList.add('sel');
+    };
+    rg.appendChild(b);
+  });
+}
+buildPfpGrids();
+
 // ─── State ───
-let myUid=null, myName=null;
-let activeId=null, activeType=null, activeName=null, activePeer=null;
+let myUid=null, myName=null, myPfp=null;
+let activeId=null, activeType=null, activeName=null, activePeer=null, activePeerPfp=null;
 let unsubMsgs=null, unsubGroups=null;
 let allUsers=[];
 let myGroups=[];
 let tab='dm';
 let sbOpen=false;
-
 let unread={};
-let lastMsg={};     // {cid:{text,mine,ts}} — last known message per conversation
-let lastActivity={}; // {cid:ms} — for sorting (most recent to top)
+let lastMsg={};
+let lastActivity={};
 let seenSet=new Set(JSON.parse(sessionStorage.getItem('ac_seen')||'[]'));
 function saveSeen(){try{sessionStorage.setItem('ac_seen',JSON.stringify([...seenSet].slice(-400)));}catch(e){}}
 
@@ -417,6 +496,23 @@ function ago(ts){
   const m=Math.floor((Date.now()-ts.toDate().getTime())/60000);
   if(m<2)return'now';if(m<60)return m+'m';if(m<1440)return Math.floor(m/60)+'h';return Math.floor(m/1440)+'d';
 }
+function avEl(pfp,name,size=22){
+  if(pfp&&pfp.length<=2&&/\p{Emoji}/u.test(pfp)){
+    return `<span style="font-size:${Math.round(size*0.75)}px">${pfp}</span>`;
+  }
+  return `<span style="font-size:${Math.round(size*0.55)}px;font-weight:700">${ini(name)}</span>`;
+}
+
+// ─── Auth tabs ───
+let authTab='login';
+function setAuthTab(t){
+  authTab=t;
+  $('tabLogin').classList.toggle('on',t==='login');
+  $('tabReg').classList.toggle('on',t==='register');
+  $('loginForm').style.display=t==='login'?'block':'none';
+  $('regForm').style.display=t==='register'?'block':'none';
+  $('sErr').textContent='';
+}
 
 // ─── Sidebar ───
 $('sbBtn').onclick=()=>sbOpen?closeSb():openSb();
@@ -424,42 +520,102 @@ function openSb(){sbOpen=true;$('sidebar').classList.remove('closed');$('sbVeil'
 function closeSb(){sbOpen=false;$('sidebar').classList.add('closed');$('sbVeil').style.display='none'}
 function goBack(){closeSb();$('chatBody').style.display='none';$('chatPh').style.display='flex';activeId=null;activeType=null}
 
-// ─── Persist session ───
-function saveS(){localStorage.setItem('ac_n',myName);localStorage.setItem('ac_u',myUid)}
-function clearS(){localStorage.removeItem('ac_n');localStorage.removeItem('ac_u')}
-function getS(){return{n:localStorage.getItem('ac_n'),u:localStorage.getItem('ac_u')}}
+// ─── Persist session (username-based, no Firebase auth tokens) ───
+function saveS(){localStorage.setItem('ac_u',myUid);localStorage.setItem('ac_n',myName);localStorage.setItem('ac_p',myPfp||'')}
+function clearS(){localStorage.removeItem('ac_u');localStorage.removeItem('ac_n');localStorage.removeItem('ac_p')}
+function getS(){return{u:localStorage.getItem('ac_u'),n:localStorage.getItem('ac_n'),p:localStorage.getItem('ac_p')}}
+
+// Simple hash for password (client-side only — for school-grade security)
+async function hashPw(pw){
+  const buf=await crypto.subtle.digest('SHA-256',new TextEncoder().encode('ac_salt_'+pw));
+  return Array.from(new Uint8Array(buf)).map(b=>b.toString(16).padStart(2,'0')).join('');
+}
 
 // ─── Auto-resume ───
-(function(){
+(async function(){
   const s=getS();
-  if(s.n&&s.u){$('nameIn').value=s.n;setErr('Resuming…','var(--ink3)');doJoin();}
+  if(s.u&&s.n){
+    setErr('Resuming session…','var(--ink3)');
+    try{
+      // Verify the stored UID still exists and matches
+      const doc=await db.collection('users').doc(s.u).get();
+      if(doc.exists&&doc.data().name===s.n){
+        myUid=s.u; myName=s.n; myPfp=s.p||PFP_LIST[0];
+        enterApp();
+      } else {
+        clearS(); setErr('');
+      }
+    }catch(e){setErr('');}
+  }
 })();
-$('joinBtn').onclick=doJoin;
-$('nameIn').onkeydown=e=>{if(e.key==='Enter'){e.preventDefault();doJoin()}};
 
-async function doJoin(){
-  const name=$('nameIn').value.trim();
-  if(!name){setErr('Enter a display name.');return}
-  if(name.length<2){setErr('Name needs at least 2 characters.');return}
-  if(!/^[a-zA-Z0-9_.\- ]+$/.test(name)){setErr('Letters, numbers, _ . - only.');return}
-  $('joinBtn').disabled=true;$('joinBtn').textContent='Connecting…';
+$('loginBtn').onclick=doLogin;
+$('regBtn').onclick=doRegister;
+$('loginPass').onkeydown=e=>{if(e.key==='Enter'){e.preventDefault();doLogin()}};
+$('regPass2').onkeydown=e=>{if(e.key==='Enter'){e.preventDefault();doRegister()}};
+$('loginUser').onkeydown=e=>{if(e.key==='Enter'){e.preventDefault();$('loginPass').focus()}};
+$('regUser').onkeydown=e=>{if(e.key==='Enter'){e.preventDefault();$('regPass').focus()}};
+$('regPass').onkeydown=e=>{if(e.key==='Enter'){e.preventDefault();$('regPass2').focus()}};
+
+async function doLogin(){
+  const name=$('loginUser').value.trim();
+  const pw=$('loginPass').value;
+  if(!name){setErr('Enter your username.');return}
+  if(!pw){setErr('Enter your password.');return}
+  $('loginBtn').disabled=true;$('loginBtn').textContent='Signing in…';
   try{
-    const cred=await auth.signInAnonymously();
-    myUid=cred.user.uid; myName=name;
-    const snap=await db.collection('users').where('name','==',name).get();
-    if(snap.docs.some(d=>d.id!==myUid)){setErr('Name taken, try another.');reset();return}
-    await db.collection('users').doc(myUid).set({name,uid:myUid,lastSeen:TS()},{merge:true});
+    const snap=await db.collection('users').where('name','==',name).limit(1).get();
+    if(snap.empty){setErr('Username not found. Register first.');resetBtn('loginBtn','Sign In →');return}
+    const doc=snap.docs[0];
+    const data=doc.data();
+    const hash=await hashPw(pw);
+    if(data.pwHash!==hash){setErr('Wrong password.');resetBtn('loginBtn','Sign In →');return}
+    myUid=doc.id; myName=data.name; myPfp=data.pfp||PFP_LIST[0];
+    await db.collection('users').doc(myUid).update({lastSeen:TS()});
     if($('remMe').checked)saveS(); else clearS();
-    $('myNameDisp').textContent=name;
-    $('myAv').textContent=ini(name);
-    $('setup').style.display='none';
-    $('app').classList.add('live');
-    if(window.innerWidth>768)openSb();
-    startApp();
-  }catch(e){console.error(e);setErr('Connection error, try again.');reset()}
+    enterApp();
+  }catch(e){console.error(e);setErr('Connection error, try again.');resetBtn('loginBtn','Sign In →')}
 }
+
+async function doRegister(){
+  const name=$('regUser').value.trim();
+  const pw=$('regPass').value;
+  const pw2=$('regPass2').value;
+  if(!name){setErr('Enter a username.');return}
+  if(name.length<2){setErr('Username needs at least 2 characters.');return}
+  if(!/^[a-zA-Z0-9_.\-]+$/.test(name)){setErr('Letters, numbers, _ . - only (no spaces).');return}
+  if(!pw){setErr('Enter a password.');return}
+  if(pw.length<6){setErr('Password must be at least 6 characters.');return}
+  if(pw!==pw2){setErr('Passwords do not match.');return}
+  $('regBtn').disabled=true;$('regBtn').textContent='Creating…';
+  try{
+    const snap=await db.collection('users').where('name','==',name).limit(1).get();
+    if(!snap.empty){setErr('Username taken, try another.');resetBtn('regBtn','Create Account ✨');return}
+    const hash=await hashPw(pw);
+    // Use anonymous Firebase auth just for a UID
+    const cred=await auth.signInAnonymously();
+    myUid=cred.user.uid; myName=name; myPfp=selectedPfp;
+    await db.collection('users').doc(myUid).set({name,uid:myUid,pwHash:hash,pfp:selectedPfp,lastSeen:TS()});
+    saveS();
+    enterApp();
+  }catch(e){console.error(e);setErr('Error: '+e.message);resetBtn('regBtn','Create Account ✨')}
+}
+
+function enterApp(){
+  $('myNameDisp').textContent=myName;
+  setAvEl($('myAv'),myPfp,myName,22);
+  $('setup').style.display='none';
+  $('app').classList.add('live');
+  if(window.innerWidth>768)openSb();
+  startApp();
+}
+
+function setAvEl(el,pfp,name,size=22){
+  el.innerHTML=avEl(pfp,name,size);
+}
+
 function setErr(msg,c='var(--R)'){$('sErr').textContent=msg;$('sErr').style.color=c}
-function reset(){$('joinBtn').disabled=false;$('joinBtn').textContent='Enter AscentChat'}
+function resetBtn(id,txt){const b=$(id);b.disabled=false;b.textContent=txt}
 
 // ─── App start ───
 function startApp(){
@@ -467,6 +623,7 @@ function startApp(){
   listenUsers();
   listenMyGroups();
   buildEp();
+  buildGifUI();
 }
 function hb(){if(myUid)db.collection('users').doc(myUid).update({lastSeen:TS()}).catch(()=>{})}
 
@@ -514,7 +671,6 @@ function renderList(){
   if(tab==='dm'){
     let users=q?allUsers.filter(u=>(u.name||'').toLowerCase().includes(q)):allUsers;
     if(!users.length){list.innerHTML=`<div class="c-empty">${q?'No users found.':'No one else here yet.<br>Share the link! 🔗'}</div>`;return}
-    // sort: unread first by lastActivity desc, then by lastActivity desc (recent msgs), then alpha
     users=[...users].sort((a,b)=>{
       const ca=dmId(myUid,a.uid), cb=dmId(myUid,b.uid);
       const ua=!!unread[ca], ub=!!unread[cb];
@@ -534,10 +690,11 @@ function renderList(){
       if(ur){previewText=ur.preview;previewUnread=true;}
       else if(lm){previewText=lm.mine?'You: '+lm.text:lm.text;}
       else{previewText='Tap to message';}
+      const pfpHtml=u.pfp?`<span style="font-size:20px">${u.pfp}</span>`:`<span style="font-size:14px;font-weight:700">${ini(u.name)}</span>`;
       const el=document.createElement('div');
       el.className='ci'+(isAct?' on':ur?' has-unread':'');
       el.innerHTML=`
-        <div class="ci-av">${ini(u.name)}${online?'<div class="ci-dot"></div>':''}</div>
+        <div class="ci-av">${pfpHtml}${online?'<div class="ci-dot"></div>':''}</div>
         <div class="ci-info">
           <div class="ci-name">${esc(u.name)}</div>
           <div class="ci-preview${previewUnread?' unread':''}">${esc(previewText.slice(0,40))}</div>
@@ -546,15 +703,12 @@ function renderList(){
           <div class="ci-time">${ur?'now':ago(u.lastSeen)}</div>
           ${ur?`<div class="ci-udot"></div>`:''}
         </div>`;
-      el.onclick=()=>{openDM(u.uid,u.name);};
+      el.onclick=()=>openDM(u.uid,u.name,u.pfp);
       list.appendChild(el);
     });
   } else {
     let groups=q?myGroups.filter(g=>(g.name||'').toLowerCase().includes(q)):myGroups;
-    if(!groups.length){
-      list.innerHTML='<div class="c-empty">No group chats yet.<br>Create one! 🎉</div>';
-      return;
-    }
+    if(!groups.length){list.innerHTML='<div class="c-empty">No group chats yet.<br>Create one! 🎉</div>';return}
     list.innerHTML='';
     groups.forEach(g=>{
       const isAct=activeId===g.id&&activeType==='group';
@@ -568,7 +722,7 @@ function renderList(){
       const el=document.createElement('div');
       el.className='ci'+(isAct?' on':ur?' has-unread':'');
       el.innerHTML=`
-        <div class="ci-av">👥</div>
+        <div class="ci-av"><span style="font-size:20px">👥</span></div>
         <div class="ci-info">
           <div class="ci-name">${esc(g.name||'Unnamed group')}</div>
           <div class="ci-preview${previewUnread?' unread':''}">${esc(previewText.slice(0,40))}</div>
@@ -592,36 +746,36 @@ function updateGlobalBadge(){
   document.title=total>0?`(${total}) AscentChat`:'AscentChat · ASCENTA 3';
 }
 
-function markRead(cid){
-  if(unread[cid]){delete unread[cid];renderList()}
-}
+function markRead(cid){if(unread[cid]){delete unread[cid];renderList()}}
 
 // ─── Open DM ───
-function openDM(uid,name){
-  activeType='dm'; activeId=dmId(myUid,uid); activeName=name; activePeer=uid;
-  mountChat(ini(name),name,'Direct message');
+function openDM(uid,name,pfp){
+  activeType='dm'; activeId=dmId(myUid,uid); activeName=name; activePeer=uid; activePeerPfp=pfp||null;
+  const chAvEl=$('chAv');
+  chAvEl.innerHTML=pfp?`<span style="font-size:20px">${pfp}</span>`:`<span style="font-size:14px;font-weight:700">${ini(name)}</span>`;
+  mountChat(name,'Direct message');
   markRead(activeId);
   if(window.innerWidth<=768)closeSb();
 }
 
 // ─── Open Group ───
 function openGroup(id,name,members){
-  activeType='group'; activeId=id; activeName=name; activePeer=null;
+  activeType='group'; activeId=id; activeName=name; activePeer=null; activePeerPfp=null;
   const others=(members||[]).filter(m=>m!==myUid).map(uid=>{
     const u=allUsers.find(x=>x.uid===uid);
     return u?u.name:uid.slice(0,6);
   });
   const subText=`${(members||[]).length} members${others.length?' · '+others.slice(0,3).join(', ')+(others.length>3?'…':''):''}`;
-  mountChat('👥',name||'Group',subText);
+  $('chAv').innerHTML=`<span style="font-size:20px">👥</span>`;
+  mountChat(name||'Group',subText);
   markRead(activeId);
   if(window.innerWidth<=768)closeSb();
 }
 
 // ─── Mount chat view ───
-function mountChat(av,name,sub){
+function mountChat(name,sub){
   $('chatPh').style.display='none';
   $('chatBody').style.display='flex';
-  $('chAv').textContent=av;
   $('chName').textContent=name;
   $('chSub').textContent=sub;
   $('msgs').innerHTML='<div class="c-empty"><div class="spin"></div></div>';
@@ -632,31 +786,26 @@ function mountChat(av,name,sub){
     ?db.collection('conversations').doc(activeId).collection('messages')
     :db.collection('groups').doc(activeId).collection('messages')
   ).orderBy('timestamp','asc');
-
   let firstLoad=true;
   unsubMsgs=colRef.onSnapshot(snap=>{
     snap.docChanges().forEach(ch=>{
       if(ch.type==='added'){
         const m=ch.doc.data(), mid=ch.doc.id;
         seenSet.add(mid); saveSeen();
-        if(!firstLoad && m.from!==myUid){
-          markRead(activeId);
-        }
+        if(!firstLoad&&m.from!==myUid)markRead(activeId);
       }
     });
     firstLoad=false;
     const allMsgs=snap.docs.map(d=>({id:d.id,...d.data()}));
-    // track last known message for preview
     const nonSys=allMsgs.filter(m=>!m.system);
     if(nonSys.length){
       const lm=nonSys[nonSys.length-1];
       const mine=lm.from===myUid;
-      const cid2=activeId;
-      lastMsg[cid2]={text:lm.text||'',mine,ts:lm.timestamp&&lm.timestamp.toDate?lm.timestamp.toDate().getTime():Date.now()};
-      if(!lastActivity[cid2])lastActivity[cid2]=lastMsg[cid2].ts;
+      lastMsg[activeId]={text:lm.gif?'[GIF]':(lm.text||''),mine,ts:lm.timestamp&&lm.timestamp.toDate?lm.timestamp.toDate().getTime():Date.now()};
+      if(!lastActivity[activeId])lastActivity[activeId]=lastMsg[activeId].ts;
     }
     renderMsgs(allMsgs);
-  }, err=>{ console.error('Msgs error:', err); $('msgs').innerHTML='<div class="c-empty">Error loading messages.</div>'; });
+  },err=>{console.error('Msgs error:',err);$('msgs').innerHTML='<div class="c-empty">Error loading messages.</div>'});
 }
 
 // ─── Render messages ───
@@ -667,7 +816,7 @@ function renderMsgs(msgs){
   if(!msgs.length){el.innerHTML='<div class="c-empty" style="margin-top:40px">No messages yet 👋<br>Say hello!</div>';return}
   el.innerHTML='';
   let lastDate='',lastFrom='';
-  msgs.forEach((m)=>{
+  msgs.forEach(m=>{
     const ds=fmtD(m.timestamp);
     if(ds!==lastDate){
       lastDate=ds;
@@ -685,19 +834,27 @@ function renderMsgs(msgs){
     const showSender=!mine&&activeType==='group'&&lastFrom!==m.from;
     lastFrom=m.from;
     const sName=mine?myName:(m.fromName||activeName||'?');
+    const sPfp=mine?myPfp:(m.fromPfp||null);
+    const avHtml=sPfp?`<span style="font-size:15px">${sPfp}</span>`:`<span style="font-size:11px;font-weight:700">${ini(sName)}</span>`;
     const reactions=m.reactions||{};
     const rHtml=Object.entries(reactions).filter(([,u])=>u.length>0)
       .map(([e,u])=>`<div class="rxn" onclick="toggleReact('${esc(m.id)}','${esc(e)}')">${e}<span>${u.length}</span></div>`).join('');
     const rBar=REACT_E.map(e=>`<span class="rc" onclick="toggleReact('${esc(m.id)}','${esc(e)}')">${e}</span>`).join('');
+    let bubbleInner;
+    if(m.gif){
+      bubbleInner=`<div class="bubble is-gif"><img src="${esc(m.gif)}" alt="GIF" loading="lazy"></div>`;
+    } else {
+      bubbleInner=`<div class="bubble">${esc(m.text)}</div>`;
+    }
     const row=document.createElement('div');
     row.className='mrow'+(mine?' me':'');
     row.innerHTML=`
-      <div class="m-av ${showAv?'':'hide'}">${ini(sName)}</div>
+      <div class="m-av ${showAv?'':'hide'}">${avHtml}</div>
       <div class="m-body">
         ${showSender?`<div class="m-sender">${esc(sName)}</div>`:''}
         <div class="bw">
           <div class="react-bar">${rBar}</div>
-          <div class="bubble">${esc(m.text)}</div>
+          ${bubbleInner}
         </div>
         ${rHtml?`<div class="rxns">${rHtml}</div>`:''}
         <div class="m-time">${fmtT(m.timestamp)}</div>
@@ -719,16 +876,13 @@ function updFab(){const el=$('msgs');$('sfab').classList.toggle('show',el.scroll
 // ─── Reactions ───
 async function toggleReact(msgId,emoji){
   if(!activeId||!msgId)return;
-  const ref=(activeType==='dm'
-    ?db.collection('conversations').doc(activeId)
-    :db.collection('groups').doc(activeId)
-  ).collection('messages').doc(msgId);
-  const snap=await ref.get(); if(!snap.exists)return;
+  const ref=(activeType==='dm'?db.collection('conversations').doc(activeId):db.collection('groups').doc(activeId)).collection('messages').doc(msgId);
+  const snap=await ref.get();if(!snap.exists)return;
   const rs=snap.data().reactions||{};
   const uids=rs[emoji]||[];
   const i=uids.indexOf(myUid);
-  if(i>=0)uids.splice(i,1); else uids.push(myUid);
-  if(!uids.length)delete rs[emoji]; else rs[emoji]=uids;
+  if(i>=0)uids.splice(i,1);else uids.push(myUid);
+  if(!uids.length)delete rs[emoji];else rs[emoji]=uids;
   await ref.update({reactions:rs});
 }
 
@@ -743,9 +897,9 @@ $('chatIn').addEventListener('input',()=>{
 async function sendMsg(){
   const text=$('chatIn').value.trim();
   if(!text||!activeId)return;
-  $('chatIn').value=''; $('chatIn').style.height='';
-  const payload={from:myUid,fromName:myName,text,timestamp:TS(),reactions:{}};
-  if(activeType==='dm') payload.to=activePeer||'';
+  $('chatIn').value='';$('chatIn').style.height='';
+  const payload={from:myUid,fromName:myName,fromPfp:myPfp||'',text,timestamp:TS(),reactions:{}};
+  if(activeType==='dm')payload.to=activePeer||'';
   try{
     if(activeType==='dm'){
       await db.collection('conversations').doc(activeId).collection('messages').add(payload);
@@ -759,10 +913,27 @@ async function sendMsg(){
   }catch(e){console.error('Send error:',e)}
 }
 
+async function sendGif(gifUrl){
+  if(!activeId)return;
+  closeGifPop();
+  const payload={from:myUid,fromName:myName,fromPfp:myPfp||'',gif:gifUrl,text:'[GIF]',timestamp:TS(),reactions:{}};
+  if(activeType==='dm')payload.to=activePeer||'';
+  try{
+    if(activeType==='dm'){
+      await db.collection('conversations').doc(activeId).collection('messages').add(payload);
+    } else {
+      await db.collection('groups').doc(activeId).collection('messages').add(payload);
+      await db.collection('groups').doc(activeId).update({updatedAt:TS(),lastMsg:'[GIF]'});
+    }
+    lastMsg[activeId]={text:'[GIF]',mine:true,ts:Date.now()};
+    lastActivity[activeId]=Date.now();
+    renderList();
+  }catch(e){console.error('GIF send error:',e)}
+}
+
 // ─── Global ping listeners ───
 let groupPingUnsubs={};
 let dmPingUnsub=null;
-
 function startGroupPingListeners(){
   if(!dmPingUnsub&&myUid){
     dmPingUnsub=db.collectionGroup('messages')
@@ -774,12 +945,12 @@ function startGroupPingListeners(){
           if(ch.type==='added'){
             const m=ch.doc.data(), mid=ch.doc.id;
             if(seenSet.has(mid))return;
-            seenSet.add(mid); saveSeen();
+            seenSet.add(mid);saveSeen();
             if(m.from===myUid)return;
             const cid=dmId(myUid,m.from);
             if(activeId!==cid){
-              bumpUnread(cid,m.fromName||'Someone',m.text);
-              showToast(m.fromName||'Someone',m.text,cid,'dm',m.from,m.fromName);
+              bumpUnread(cid,m.fromName||'Someone',m.gif?'[GIF]':(m.text||''));
+              showToast(m.fromName||'Someone',m.gif?'[GIF]':(m.text||''),cid,'dm',m.from,m.fromName,null,m.fromPfp);
             }
           }
         });
@@ -794,11 +965,11 @@ function startGroupPingListeners(){
           if(ch.type==='added'){
             const m=ch.doc.data(), mid=ch.doc.id;
             if(seenSet.has(mid))return;
-            seenSet.add(mid); saveSeen();
+            seenSet.add(mid);saveSeen();
             if(m.from===myUid||m.system)return;
             if(activeId!==g.id){
-              bumpUnread(g.id,m.fromName||'Someone',m.text,g.name);
-              showToast(m.fromName||'Someone',m.text,g.id,'group',null,null,g.name);
+              bumpUnread(g.id,m.fromName||'Someone',m.gif?'[GIF]':(m.text||''),g.name);
+              showToast(m.fromName||'Someone',m.gif?'[GIF]':(m.text||''),g.id,'group',null,null,g.name,m.fromPfp);
             }
           }
         });
@@ -808,7 +979,7 @@ function startGroupPingListeners(){
 }
 
 function bumpUnread(cid,fromName,text,groupName){
-  if(!unread[cid]) unread[cid]={count:0,preview:'',fromName};
+  if(!unread[cid])unread[cid]={count:0,preview:'',fromName};
   unread[cid].count++;
   unread[cid].preview=(groupName?fromName+': ':'')+text;
   unread[cid].fromName=fromName;
@@ -817,7 +988,7 @@ function bumpUnread(cid,fromName,text,groupName){
   renderList();
 }
 
-function showToast(from,text,cid,type,peerUid,peerName,groupName){
+function showToast(from,text,cid,type,peerUid,peerName,groupName,pfp){
   let orig=document.title,fl=true;
   const ti=setInterval(()=>{document.title=fl?`🔔 ${from}: ${text.slice(0,20)}`:orig;fl=!fl},700);
   setTimeout(()=>{clearInterval(ti);updateGlobalBadge()},8000);
@@ -835,12 +1006,15 @@ function showToast(from,text,cid,type,peerUid,peerName,groupName){
   const t=document.createElement('div');
   t.className='toast';
   const label=groupName?`${from} in ${groupName}`:from;
-  t.innerHTML=`<div class="t-av">${ini(from)}</div><div class="t-body"><div class="t-who">${esc(label)}</div><div class="t-msg">${esc(text.slice(0,60))}</div></div>`;
+  const avHtml=pfp?`<span style="font-size:18px">${pfp}</span>`:`<span style="font-size:12px;font-weight:700">${ini(from)}</span>`;
+  t.innerHTML=`<div class="t-av">${avHtml}</div><div class="t-body"><div class="t-who">${esc(label)}</div><div class="t-msg">${esc(text.slice(0,60))}</div></div>`;
   const dismiss=()=>{t.classList.add('bye');setTimeout(()=>t.remove(),220)};
   t.onclick=()=>{
     dismiss();
-    if(type==='dm'&&peerUid)openDM(peerUid,peerName||from);
-    else if(type==='group'){
+    if(type==='dm'&&peerUid){
+      const u=allUsers.find(x=>x.uid===peerUid);
+      openDM(peerUid,peerName||from,u?u.pfp:pfp);
+    } else if(type==='group'){
       const grp=myGroups.find(g=>g.id===cid);
       if(grp)openGroup(grp.id,grp.name,grp.members||[]);
       setTab('grp');
@@ -854,13 +1028,80 @@ function showToast(from,text,cid,type,peerUid,peerName,groupName){
 // ─── Emoji picker ───
 const EMOJIS=['😀','😂','🥰','😎','🤔','😭','🥳','🎉','🔥','💯','👍','👎','❤️','💔','✨','🌟','😅','🤣','😊','🥺','😍','🤩','🎊','🙌','💪','🤝','👏','🫡','😏','🤓','😴','🫶','💀','🤯','🫠','👀','🌈','🍕','🍔','🎮','🎵','⚡','💎','🚀','🌙','☀️','⭐','🦋','🌺','🐶','🐱','🎸','🍎','🌊','🏆','🎯','🧠','🪄','💫','🍀','🎀'];
 function buildEp(){
-  const p=$('epPop'),g=document.createElement('div');g.className='ep-grid';
-  EMOJIS.forEach(e=>{const b=document.createElement('div');b.className='ep';b.textContent=e;b.onclick=()=>insE(e);g.appendChild(b)});
-  p.appendChild(g);
+  const p=$('epPop'),gr=document.createElement('div');gr.className='ep-grid';
+  EMOJIS.forEach(e=>{const b=document.createElement('div');b.className='ep';b.textContent=e;b.onclick=()=>insE(e);gr.appendChild(b)});
+  p.appendChild(gr);
 }
-function toggleEp(){$('epPop').classList.toggle('open')}
+function toggleEp(){
+  closeGifPop();
+  $('epPop').classList.toggle('open');
+}
 function insE(e){const t=$('chatIn');const pos=t.selectionStart||t.value.length;t.value=t.value.slice(0,pos)+e+t.value.slice(pos);t.focus();const np=pos+e.length;t.setSelectionRange(np,np)}
-document.addEventListener('click',e=>{if(!e.target.closest('#epPop')&&!e.target.closest('#emBtn'))$('epPop').classList.remove('open')});
+document.addEventListener('click',e=>{
+  if(!e.target.closest('#epPop')&&!e.target.closest('#emBtn'))$('epPop').classList.remove('open');
+  if(!e.target.closest('#gifPop')&&!e.target.closest('#gifBtn'))closeGifPop();
+});
+
+// ─── GIF / Tenor ───
+const TENOR_KEY='AIzaSyBAlJE5YSwv3B9MpijZ5DuXNWZPeJ_X2qc'; // public demo key
+let gifTimer=null;
+
+function buildGifUI(){
+  $('gifSearch').addEventListener('input',()=>{
+    clearTimeout(gifTimer);
+    const q=$('gifSearch').value.trim();
+    if(!q){$('gifGrid').innerHTML='<div class="gif-loading">Type to search GIFs 🎬</div>';return}
+    gifTimer=setTimeout(()=>searchGifs(q),400);
+  });
+}
+
+function toggleGif(){
+  $('epPop').classList.remove('open');
+  $('gifPop').classList.toggle('open');
+  if($('gifPop').classList.contains('open')){
+    $('gifSearch').focus();
+    if(!$('gifSearch').value.trim())loadTrending();
+  }
+}
+function closeGifPop(){$('gifPop').classList.remove('open')}
+
+async function loadTrending(){
+  $('gifGrid').innerHTML='<div class="gif-loading">Loading trending…</div>';
+  try{
+    const r=await fetch(`https://tenor.googleapis.com/v2/featured?key=${TENOR_KEY}&limit=12&media_filter=gif`);
+    const d=await r.json();
+    renderGifs(d.results||[]);
+  }catch(e){$('gifGrid').innerHTML='<div class="gif-loading">Could not load GIFs.</div>'}
+}
+
+async function searchGifs(q){
+  $('gifGrid').innerHTML='<div class="gif-loading">Searching…</div>';
+  try{
+    const r=await fetch(`https://tenor.googleapis.com/v2/search?key=${TENOR_KEY}&q=${encodeURIComponent(q)}&limit=12&media_filter=gif`);
+    const d=await r.json();
+    renderGifs(d.results||[]);
+  }catch(e){$('gifGrid').innerHTML='<div class="gif-loading">Search failed.</div>'}
+}
+
+function renderGifs(results){
+  const g=$('gifGrid');
+  if(!results.length){g.innerHTML='<div class="gif-loading">No GIFs found.</div>';return}
+  g.innerHTML='';
+  results.forEach(item=>{
+    const media=item.media_formats;
+    const url=(media.tinygif||media.gif||media.mediumgif||{}).url;
+    const preview=(media.tinygif||media.nanogif||media.gif||{}).url;
+    if(!url)return;
+    const d=document.createElement('div');
+    d.className='gif-item';
+    const img=document.createElement('img');
+    img.src=preview||url;
+    img.loading='lazy';
+    d.appendChild(img);
+    d.onclick=()=>sendGif(url);
+    g.appendChild(d);
+  });
+}
 
 // ─── Group modal ───
 function openGM(e){
@@ -869,10 +1110,11 @@ function openGM(e){
   c.innerHTML='';
   if(!allUsers.length){
     c.innerHTML='<div class="c-empty">No other users yet.</div>';
-  } else {
+  }else{
     allUsers.forEach(u=>{
       const l=document.createElement('label');l.className='m-ck';
-      l.innerHTML=`<input type="checkbox" value="${esc(u.uid)}"><span class="m-ck-name">${esc(u.name)}</span>`;
+      const pfpSpan=u.pfp?`<span style="font-size:16px;margin-right:4px">${u.pfp}</span>`:'';
+      l.innerHTML=`<input type="checkbox" value="${esc(u.uid)}"><span class="m-ck-name">${pfpSpan}${esc(u.name)}</span>`;
       c.appendChild(l);
     });
   }
@@ -888,31 +1130,25 @@ async function createGroup(){
   $('grpErr').textContent='Creating…';
   const members=[myUid,...checked.map(c=>c.value)];
   try{
-    const ref=await db.collection('groups').add({
-      name, members,
-      createdBy:myUid,
-      createdAt:TS(),
-      updatedAt:TS(),
-      lastMsg:''
-    });
+    const ref=await db.collection('groups').add({name,members,createdBy:myUid,createdAt:TS(),updatedAt:TS(),lastMsg:''});
     await db.collection('groups').doc(ref.id).collection('messages').add({
-      system:true,
-      text:`${myName} created "${name}" 🎉`,
-      from:'system',fromName:'System',
-      timestamp:TS(),reactions:{}
+      system:true,text:`${myName} created "${name}" 🎉`,
+      from:'system',fromName:'System',fromPfp:'',timestamp:TS(),reactions:{}
     });
-    closeGM();
-    setTab('grp');
-    openGroup(ref.id,name,members);
+    closeGM();setTab('grp');openGroup(ref.id,name,members);
   }catch(e){$('grpErr').textContent='Error: '+e.message;console.error(e)}
 }
-
 $('grpOv').addEventListener('click',e=>{if(e.target===$('grpOv'))closeGM()});
 
-// ─── Rename ───
+// ─── Rename / PFP ───
 function openRename(){
+  rpSelectedPfp=myPfp||PFP_LIST[0];
   $('renameInput').value=myName||'';
   $('rpErr').textContent='';
+  // Mark current pfp
+  $('rpPfpGrid').querySelectorAll('.rp-pfp-opt').forEach(b=>{
+    b.classList.toggle('sel',b.dataset.pfp===rpSelectedPfp);
+  });
   $('renamePop').classList.add('open');
   setTimeout(()=>{$('renameInput').focus();$('renameInput').select()},50);
 }
@@ -926,19 +1162,22 @@ document.addEventListener('click',e=>{
 });
 async function confirmRename(){
   const name=$('renameInput').value.trim();
+  const pfp=rpSelectedPfp||myPfp||PFP_LIST[0];
   if(!name){$('rpErr').textContent='Enter a name.';return}
   if(name.length<2){$('rpErr').textContent='At least 2 characters.';return}
   if(!/^[a-zA-Z0-9_.\- ]+$/.test(name)){$('rpErr').textContent='Letters, numbers, _ . - only.';return}
-  if(name===myName){closeRename();return}
-  $('rpErr').textContent='Checking…';
+  if(name===myName&&pfp===myPfp){closeRename();return}
+  $('rpErr').textContent='Saving…';
   try{
-    const snap=await db.collection('users').where('name','==',name).get();
-    if(snap.docs.some(d=>d.id!==myUid)){$('rpErr').textContent='Name taken, try another.';return}
-    await db.collection('users').doc(myUid).update({name});
-    myName=name;
+    if(name!==myName){
+      const snap=await db.collection('users').where('name','==',name).get();
+      if(snap.docs.some(d=>d.id!==myUid)){$('rpErr').textContent='Name taken.';return}
+    }
+    await db.collection('users').doc(myUid).update({name,pfp});
+    myName=name; myPfp=pfp;
     $('myNameDisp').textContent=name;
-    $('myAv').textContent=ini(name);
-    if($('remMe').checked)saveS();
+    setAvEl($('myAv'),pfp,name,22);
+    saveS();
     closeRename();
   }catch(e){$('rpErr').textContent='Error, try again.';console.error(e)}
 }
